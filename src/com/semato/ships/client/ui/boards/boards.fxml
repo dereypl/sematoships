@@ -8,18 +8,18 @@
 
 <AnchorPane id="content_home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.playerinfo.PlayerInfoController">
    <children>
-      <Text fill="#dadada" layoutX="62.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
+      <Text fx:id="playerName" fill="#dadada" layoutX="62.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
          <font>
             <Font size="25.0" />
          </font></Text>
       <ImageView fitHeight="417.0" fitWidth="423.0" layoutX="62.0" layoutY="166.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/your_board.png" />
+            <Image url="@../../resources/assets/your_board.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="417.0" fitWidth="423.0" layoutX="800.0" layoutY="166.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/enemy_board.png" />
+            <Image url="@../../resources/assets/enemy_board.png" />
          </image>
       </ImageView>
       <Text fill="#dadada" layoutX="800.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
@@ -29,22 +29,22 @@
       </Text>
       <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="897.0" layoutY="606.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/enemy_hit.png" />
+            <Image url="@../../resources/assets/enemy_hit.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1117.0" layoutY="606.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/enemy_missed.png" />
+            <Image url="@../../resources/assets/enemy_missed.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="274.0" layoutY="255.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/your_ship.png" />
+            <Image url="@../../resources/assets/your_ship.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="274.0" layoutY="316.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/your_ship_hit.png" />
+            <Image url="@../../resources/assets/your_ship_hit.png" />
          </image>
       </ImageView>
       <Text fill="#00f0ff" layoutX="62.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Twoja plansza">
@@ -54,12 +54,12 @@
       </Text>
       <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="388.0" layoutY="607.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/your_ship.png" />
+            <Image url="@../../resources/assets/your_ship.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="191.0" layoutY="607.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/your_ship_hit.png" />
+            <Image url="@../../resources/assets/your_ship_hit.png" />
          </image>
       </ImageView>
       <Text fill="#dadada" layoutX="415.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Twój statek">
@@ -74,12 +74,12 @@
       </Text>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1012.0" layoutY="392.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/enemy_hit.png" />
+            <Image url="@../../resources/assets/enemy_hit.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1012.0" layoutY="336.0">
          <image>
-            <Image url="@../../../../../../../../SHARED/semato_ships/enemy_missed.png" />
+            <Image url="@../../resources/assets/enemy_missed.png" />
          </image>
       </ImageView>
       <Text fill="#dadada" layoutX="1144.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nie tafiono">
