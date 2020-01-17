@@ -12,10 +12,6 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
 
-
-    @FXML
-    private JFXButton goToRepertoireButton;
-
     private static HomeController instance;
 
     public HomeController() {
@@ -28,7 +24,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void handleStartGameAction(ActionEvent event) {
-//        WrapperController.getInstance().changeContentToRepertoire();
+        WrapperController.getInstance().changeContentToPlayerInfo();
     }
 
     @Override

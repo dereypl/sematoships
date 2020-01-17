@@ -80,15 +80,15 @@ public class WrapperController extends MainController {
 //        setContentPage(contentPane, "/main/java/Cinemato/ui/repertoire/repertoire.fxml");
 //    }
 
-//    @FXML
-//    public void changeContentToSeatSelector() {
-//        setContentPage(contentPane, "/main/java/Cinemato/ui/reservation/seatSelector/seatSelector.fxml");
-//    }
-//
-//    @FXML
-//    public void changeContentToPayment(ActionEvent event) {
-//        setContentPage(contentPane, "/main/java/Cinemato/ui/reservation/payment/payment.fxml");
-//    }
+    @FXML
+    public void changeContentToPlayerInfo() {
+        setContentPage(contentPane, "/com/semato/ships/client/ui/playerinfo/playerInfo.fxml");
+    }
+
+    @FXML
+    public void changeContentToBoards() {
+        setContentPage(contentPane, "/com/semato/ships/client/ui/boards/boards.fxml");
+    }
 //
 //    @FXML
 //    public void changeContentToReservationStatus() {

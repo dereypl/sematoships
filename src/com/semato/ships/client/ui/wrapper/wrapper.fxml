@@ -6,12 +6,12 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.wrapper.WrapperController">
    <children>
-      <ImageView fx:id="CloseButton" fitHeight="25.0" fitWidth="25.0" layoutX="1261.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <AnchorPane id="headerPane" prefHeight="50.0" prefWidth="1300.0" stylesheets="@../main.css" />
+      <AnchorPane fx:id="contentPane" layoutY="50.0" prefHeight="650.0" prefWidth="1300.0" />
+      <ImageView fx:id="CloseButton" fitHeight="25.0" fitWidth="25.0" layoutX="1261.0" layoutY="14.0" onMousePressed="#handleCloseButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="closeButton">
          <image>
             <Image url="@../../resources/assets/close_icon.png" />
          </image>
       </ImageView>
-      <AnchorPane id="headerPane" prefHeight="50.0" prefWidth="1300.0" stylesheets="@../main.css" />
-      <AnchorPane fx:id="contentPane" layoutY="50.0" prefHeight="650.0" prefWidth="1300.0" />
    </children>
 </AnchorPane>

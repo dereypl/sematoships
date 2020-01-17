@@ -6,6 +6,17 @@
     -fx-pref-height: 50px;
 }
 
+.closeButton{
+    -fx-background-image: url("../resources/assets/close_icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 36 36;
+    -fx-background-position: center;
+}
+
+.input{
+    -fx-text-fill: white;
+}
+
 #headerPane{
     -fx-background-image: url("../resources/assets/header.png");
     -fx-background-repeat: stretch;
