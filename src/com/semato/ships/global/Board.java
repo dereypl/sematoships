@@ -2,9 +2,11 @@ package com.semato.ships.global;
 
 import javafx.util.Pair;
 
+import java.io.*;
+import java.util.Base64;
 import java.util.HashMap;
 
-public class Board {
+public class Board implements Serializable {
 
     /**
      * @Front statuse dla frontu
@@ -240,6 +242,28 @@ public class Board {
             return status;
         }
 
+    }
+
+    public static String serialize(Board board) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(bos)) {
+            outputStream.writeObject(board);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Base64.getEncoder().encodeToString(bos.toByteArray());
+    }
+
+    public static Board unserialize(String serializedObiect) {
+        Board board = null;
+        final byte[] data = Base64.getDecoder().decode(serializedObiect);
+        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+        try (ObjectInputStream inputStream = new ObjectInputStream(bis)) {
+            board = (Board) inputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return board;
     }
 
 }
