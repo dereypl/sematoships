@@ -48,7 +48,7 @@ public class BoardsController implements Initializable {
             for (int x = 0; x < DIMENSION; x++) {
 
                 if (board == playerBoard) fieldStatus = Context.getInstance().getMyBoard().getStatus(x, y);
-                else fieldStatus = Context.getInstance().getEnemyBoard().getStatus(x, y);
+                else fieldStatus = Context.getInstance().getEnemyBoard().getStatusForEnemy(x, y);
 
                 switch (fieldStatus) {
                     case STATUS_WATER:
