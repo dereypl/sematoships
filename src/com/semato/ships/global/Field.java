@@ -1,6 +1,8 @@
 package com.semato.ships.global;
 
-public class Field {
+import java.io.Serializable;
+
+public class Field implements Serializable {
 
     private boolean hasShip = false;
     private boolean isShotAt = false;

@@ -2,8 +2,6 @@ package test.com.semato.ships.global;
 
 import com.semato.ships.global.Board;
 import com.semato.ships.global.BoardGenerator;
-import com.semato.ships.global.Field;
-import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
