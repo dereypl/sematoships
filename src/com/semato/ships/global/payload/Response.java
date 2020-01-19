@@ -2,7 +2,7 @@ package com.semato.ships.global.payload;
 
 import java.io.Serializable;
 
-public class Response implements Serializable {
+public abstract class Response implements Serializable {
 
     private String responseName;
 
