@@ -6,6 +6,15 @@ import java.util.HashMap;
 
 public class Board {
 
+    /**
+     * @Front statuse dla frontu
+     */
+    public static final int STATUS_WATER = 0;
+    public static final int STATUS_SHIP = 1;
+    public static final int STATUS_MISS = 2;
+    public static final int STATUS_HIT = 3;
+    public static final int STATUS_SUNK = 4;
+
     public static final int DESTONATION_N = 0;
     public static final int DESTONATION_E = 1;
     public static final int DESTONATION_S = 2;
@@ -14,12 +23,6 @@ public class Board {
     public static final int DESTONATION_SE = 5;
     public static final int DESTONATION_SW = 6;
     public static final int DESTONATION_NW = 7;
-
-    public static final int STATUS_WATER = 0;
-    public static final int STATUS_SHIP = 1;
-    public static final int STATUS_MISS = 2;
-    public static final int STATUS_HIT = 3;
-    public static final int STATUS_SUNK = 4;
 
     public static final int DIMENSION = 10;
     public static final int NUMBER_OF_FIELDS_WITH_SHIPS =
@@ -41,6 +44,10 @@ public class Board {
         }
     }
 
+    /**
+     * @Front Czy plansza przegrała
+     * @return
+     */
     public boolean isBoardDestroyed() {
         int hits = 0;
         for (int x = 0; x < Board.DIMENSION; x++) {
@@ -62,6 +69,12 @@ public class Board {
         return boardMap.get(coordinates);
     }
 
+    /**
+     * @Front strzel
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean shoot(int x, int y) {
         return getField(x, y).shoot();
     }
@@ -184,6 +197,12 @@ public class Board {
         return ship.isSunk();
     }
 
+    /**
+     * @Front zwraca status pola dla właściciela (nietrafione statki widoczne)
+     * @param x
+     * @param y
+     * @return
+     */
     public int getStatus(int x, int y) {
 
         Field field = getField(x, y);
@@ -207,6 +226,12 @@ public class Board {
         return STATUS_WATER;
     }
 
+    /**
+     * @Front zwraca status pola dla przeciwnika (nietrafione statki niewidoczne)
+     * @param x
+     * @param y
+     * @return
+     */
     public int getStatusForEnemy(int x, int y) {
         int status = getStatus(x, y);
         if (status == STATUS_SHIP) {
