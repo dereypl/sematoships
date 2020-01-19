@@ -9,12 +9,16 @@ public class ServerTcp {
     private boolean serverIsRunning;
     private static volatile int countUsers;
 
-    public void runServer(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        System.out.println("Server started");
-        serverIsRunning = true;
-        while (serverIsRunning) {
-            new RequestHandler(serverSocket.accept()).start();
+    public void runServer(int port) {
+        try {
+            serverSocket = new ServerSocket(port);
+            System.out.println("Server started");
+            serverIsRunning = true;
+            while (serverIsRunning) {
+                new RequestHandler(serverSocket.accept()).start();
+            }
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -26,11 +30,11 @@ public class ServerTcp {
         }
     }
 
-    public static void increaseCountOfUsers(){
+    public synchronized static void increaseCountOfUsers(){
         countUsers++;
     }
 
-    public static void decreaseCountOfUsers(){
+    public synchronized static void decreaseCountOfUsers(){
         countUsers--;
     }
 

@@ -39,11 +39,13 @@ public class RequestHandler extends Thread {
                     System.out.println(endConnectionRequest.getRequestName());
                     isTerminated = true;
                 }
+
+
             }
 
             endConnection();
-        } catch (
-                IOException ex) {
+        } catch (IOException ex) {
+            ServerTcp.decreaseCountOfUsers();
             System.err.println(ex);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
