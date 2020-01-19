@@ -1,54 +1,59 @@
 package com.semato.ships.server.connector;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import com.semato.ships.global.payload.EndConnectionRequest;
+import com.semato.ships.global.payload.StartGameRequest;
+import com.semato.ships.global.payload.StartGameResponse;
+
+import java.io.*;
 import java.net.Socket;
 
 public class RequestHandler extends Thread {
     private Socket connection;
-    private BufferedReader in;
-    private PrintWriter out;
-
+    private ObjectOutputStream outObj;
+    private ObjectInputStream inObj;
 
     protected RequestHandler(Socket connection) {
         this.connection = connection;
+        ServerTcp.increaseCountOfUsers();
     }
 
     @Override
     public void run() {
         try {
-            out = new PrintWriter(connection.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            System.out.println("Currently connect users: " + ServerTcp.getCountUsers());
+            outObj = new ObjectOutputStream(connection.getOutputStream());
+            inObj = new ObjectInputStream(connection.getInputStream());
 
             boolean isTerminated = false;
-            String inputLine;
 
-            while(!isTerminated){
-                inputLine = in.readLine();
-                String[] request = inputLine.split(";");
-                for (int i = 0; i < request.length; i++) {
-                    System.out.println("request[" + i + "] " + request[i]);
+            while (!isTerminated) {
+                Object object = inObj.readObject();
+                if(object instanceof StartGameRequest){
+                    StartGameRequest startGameRequest = (StartGameRequest) object;
+                    System.out.println(startGameRequest.getNick());
+                    outObj.writeObject(new StartGameResponse());
                 }
 
-                switch (request[0]) {
-                    case ".": {
-                        out.println("bye");
-                        isTerminated = true;
-                        break;
-                    }
-                    default: {
-                        out.println("request not found!");
-                    }
+                if(object instanceof EndConnectionRequest){
+                    EndConnectionRequest endConnectionRequest = (EndConnectionRequest) object;
+                    System.out.println(endConnectionRequest.getRequestName());
+                    isTerminated = true;
                 }
             }
 
-            in.close();
-            out.close();
-            connection.close();
-        } catch (IOException ex) {
+            endConnection();
+        } catch (
+                IOException ex) {
             System.err.println(ex);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void endConnection() throws IOException {
+        ServerTcp.decreaseCountOfUsers();
+        outObj.close();
+        inObj.close();
+        connection.close();
     }
 }

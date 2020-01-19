@@ -10,7 +10,7 @@ public class Main {
 
         ServerTcp server = new ServerTcp();
         try {
-            server.runServer(4999);
+            server.runServer(5000);
             server.stop();
         } catch (IOException e) {
             e.printStackTrace();

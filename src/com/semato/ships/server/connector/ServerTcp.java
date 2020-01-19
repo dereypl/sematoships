@@ -7,6 +7,7 @@ public class ServerTcp {
 
     private ServerSocket serverSocket;
     private boolean serverIsRunning;
+    private static volatile int countUsers;
 
     public void runServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -23,5 +24,17 @@ public class ServerTcp {
             serverIsRunning = false;
             serverSocket.close();
         }
+    }
+
+    public static void increaseCountOfUsers(){
+        countUsers++;
+    }
+
+    public static void decreaseCountOfUsers(){
+        countUsers--;
+    }
+
+    public static int getCountUsers(){
+        return countUsers;
     }
 }
