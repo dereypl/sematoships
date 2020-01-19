@@ -15,6 +15,12 @@ public class Board {
     public static final int DESTONATION_SW = 6;
     public static final int DESTONATION_NW = 7;
 
+    public static final int STATUS_WATER = 0;
+    public static final int STATUS_SHIP = 1;
+    public static final int STATUS_MISS = 2;
+    public static final int STATUS_HIT = 3;
+    public static final int STATUS_SUNK = 4;
+
     public static final int DIMENSION = 10;
     public static final int NUMBER_OF_FIELDS_WITH_SHIPS =
         BoardGenerator.CARRIER_QUANTITY * BoardGenerator.CARRIER_SIZE
@@ -60,7 +66,7 @@ public class Board {
         return getField(x, y).shoot();
     }
 
-    public String getBoardPlan() {
+    public String getBoardPlan(boolean forEnemy) {
 
         String plan = "";
 
@@ -71,18 +77,34 @@ public class Board {
             plan += " " + x + " ";
             for (int y = 0; y < Board.DIMENSION; y++) {
                 Field field = getField(x, y);
-                if (field.isHit()) {
-                    plan += " X ";
-                } else if (field.hasShip()) {
-                    plan += " H ";
-                } else {
-                    plan += " - ";
+                int status = (forEnemy) ? getStatusForEnemy(x, y) : getStatus(x, y);
+                String sign = "-";
+
+                switch (status) {
+                    case STATUS_WATER:
+                        sign = "-";
+                        break;
+                    case STATUS_SHIP:
+                        sign = "H";
+                        break;
+                    case STATUS_HIT:
+                        sign = "X";
+                        break;
+                    case STATUS_MISS:
+                        sign = "~";
+                        break;
+                    case STATUS_SUNK:
+                        sign = "#";
+                        break;
                 }
+                plan += " " + sign + " ";
             }
 
             plan += System.lineSeparator();
 
         }
+
+        plan += System.lineSeparator();
 
         return plan;
     }
@@ -129,6 +151,11 @@ public class Board {
         return getField(x, y);
     }
 
+    /**
+     * Odpowiada na pytanie: czy na tym polu może zostaś postawiony segment statku.
+     * @param field
+     * @return
+     */
     public boolean isFree(Field field) {
         if (field.hasShip()) {
             return false;
@@ -148,8 +175,46 @@ public class Board {
         return true;
     }
 
+    public boolean isSunk(int x, int y) {
+        Field field = getField(x, y);
+        Ship ship = Ship.findShipByField(field, this);
+        if (ship == null) {
+            return false;
+        }
+        return ship.isSunk();
+    }
 
+    public int getStatus(int x, int y) {
 
+        Field field = getField(x, y);
 
+        if (isSunk(x,y)) {
+            return STATUS_SUNK;
+        }
+
+        if (field.isHit()) {
+            return STATUS_HIT;
+        }
+
+        if (field.isShotAt()) {
+            return STATUS_MISS;
+        }
+
+        if (field.hasShip()) {
+            return STATUS_SHIP;
+        }
+
+        return STATUS_WATER;
+    }
+
+    public int getStatusForEnemy(int x, int y) {
+        int status = getStatus(x, y);
+        if (status == STATUS_SHIP) {
+            return STATUS_WATER;
+        } else {
+            return status;
+        }
+
+    }
 
 }
