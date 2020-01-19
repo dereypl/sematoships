@@ -2,9 +2,7 @@ package test.com.semato.ships.global;
 
 import com.semato.ships.global.Board;
 import com.semato.ships.global.BoardGenerator;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
 class BoardGeneratorTest {
 
