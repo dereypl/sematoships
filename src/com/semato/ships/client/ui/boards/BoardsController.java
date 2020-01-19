@@ -1,15 +1,13 @@
 package com.semato.ships.client.ui.boards;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 public class BoardsController {
 
-
     @FXML
-    Text playerName;
+    public Text playerNameLabel;
 
     private static BoardsController instance;
 

@@ -31,6 +31,6 @@ public class PlayerInfoController {
     private void handleStartGameAction()
     {
         WrapperController.getInstance().changeContentToBoards();
-//        BoardsController.getInstance().playerName.setText(input.getText());
+        BoardsController.getInstance().playerNameLabel.setText(input.getText());
     }
 }
