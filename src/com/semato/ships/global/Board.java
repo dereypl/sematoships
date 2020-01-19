@@ -6,6 +6,15 @@ import java.util.HashMap;
 
 public class Board {
 
+    /**
+     * @Front statuse dla frontu
+     */
+    public static final int STATUS_WATER = 0;
+    public static final int STATUS_SHIP = 1;
+    public static final int STATUS_MISS = 2;
+    public static final int STATUS_HIT = 3;
+    public static final int STATUS_SUNK = 4;
+
     public static final int DESTONATION_N = 0;
     public static final int DESTONATION_E = 1;
     public static final int DESTONATION_S = 2;
@@ -35,6 +44,10 @@ public class Board {
         }
     }
 
+    /**
+     * @Front Czy plansza przegrała
+     * @return
+     */
     public boolean isBoardDestroyed() {
         int hits = 0;
         for (int x = 0; x < Board.DIMENSION; x++) {
@@ -56,11 +69,17 @@ public class Board {
         return boardMap.get(coordinates);
     }
 
+    /**
+     * @Front strzel
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean shoot(int x, int y) {
         return getField(x, y).shoot();
     }
 
-    public String getBoardPlan() {
+    public String getBoardPlan(boolean forEnemy) {
 
         String plan = "";
 
@@ -71,18 +90,34 @@ public class Board {
             plan += " " + x + " ";
             for (int y = 0; y < Board.DIMENSION; y++) {
                 Field field = getField(x, y);
-                if (field.isHit()) {
-                    plan += " X ";
-                } else if (field.hasShip()) {
-                    plan += " H ";
-                } else {
-                    plan += " - ";
+                int status = (forEnemy) ? getStatusForEnemy(x, y) : getStatus(x, y);
+                String sign = "-";
+
+                switch (status) {
+                    case STATUS_WATER:
+                        sign = "-";
+                        break;
+                    case STATUS_SHIP:
+                        sign = "H";
+                        break;
+                    case STATUS_HIT:
+                        sign = "X";
+                        break;
+                    case STATUS_MISS:
+                        sign = "~";
+                        break;
+                    case STATUS_SUNK:
+                        sign = "#";
+                        break;
                 }
+                plan += " " + sign + " ";
             }
 
             plan += System.lineSeparator();
 
         }
+
+        plan += System.lineSeparator();
 
         return plan;
     }
@@ -129,6 +164,11 @@ public class Board {
         return getField(x, y);
     }
 
+    /**
+     * Odpowiada na pytanie: czy na tym polu może zostaś postawiony segment statku.
+     * @param field
+     * @return
+     */
     public boolean isFree(Field field) {
         if (field.hasShip()) {
             return false;
@@ -148,8 +188,58 @@ public class Board {
         return true;
     }
 
+    public boolean isSunk(int x, int y) {
+        Field field = getField(x, y);
+        Ship ship = Ship.findShipByField(field, this);
+        if (ship == null) {
+            return false;
+        }
+        return ship.isSunk();
+    }
 
+    /**
+     * @Front zwraca status pola dla właściciela (nietrafione statki widoczne)
+     * @param x
+     * @param y
+     * @return
+     */
+    public int getStatus(int x, int y) {
 
+        Field field = getField(x, y);
 
+        if (isSunk(x,y)) {
+            return STATUS_SUNK;
+        }
+
+        if (field.isHit()) {
+            return STATUS_HIT;
+        }
+
+        if (field.isShotAt()) {
+            return STATUS_MISS;
+        }
+
+        if (field.hasShip()) {
+            return STATUS_SHIP;
+        }
+
+        return STATUS_WATER;
+    }
+
+    /**
+     * @Front zwraca status pola dla przeciwnika (nietrafione statki niewidoczne)
+     * @param x
+     * @param y
+     * @return
+     */
+    public int getStatusForEnemy(int x, int y) {
+        int status = getStatus(x, y);
+        if (status == STATUS_SHIP) {
+            return STATUS_WATER;
+        } else {
+            return status;
+        }
+
+    }
 
 }
