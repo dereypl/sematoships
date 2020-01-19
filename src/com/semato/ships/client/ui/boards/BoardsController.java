@@ -44,8 +44,8 @@ public class BoardsController implements Initializable {
 
         int fieldStatus;
 
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < DIMENSION; y++) {
+            for (int x = 0; x < DIMENSION; x++) {
 
                 if (board == playerBoard) fieldStatus = Context.getInstance().getMyBoard().getStatus(x, y);
                 else fieldStatus = Context.getInstance().getEnemyBoard().getStatus(x, y);
