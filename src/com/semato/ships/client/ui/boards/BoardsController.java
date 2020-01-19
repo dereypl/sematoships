@@ -1,10 +1,13 @@
 package com.semato.ships.client.ui.boards;
 
 import com.semato.ships.client.Context;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -52,26 +55,32 @@ public class BoardsController implements Initializable {
 
                 switch (fieldStatus) {
                     case STATUS_WATER:
-                        if (board == playerBoard) board.add(new ImageView(water), y, x);
-                        else board.add(new ImageView(enemy_water), y, x);
+                        if (board == playerBoard) board.add(new ImageView(water), x, y);
+                        else {
+                            board.add(new ImageView(enemy_water), x, y);
+                        }
+
+                        int finalX = x;
+                        int finalY = y;
+                        playerBoard.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY));
                         break;
 
                     case STATUS_SHIP:
-                        board.add(new ImageView(ship), y, x);
+                        board.add(new ImageView(ship), x, y);
                         break;
 
                     case STATUS_MISS:
-                        if (board == playerBoard) board.add(new ImageView(player_miss), y, x);
-                        else board.add(new ImageView(enemy_miss), y, x);
+                        if (board == playerBoard) board.add(new ImageView(player_miss), x, y);
+                        else board.add(new ImageView(enemy_miss), x, y);
                         break;
 
                     case STATUS_HIT:
-                        if (board == playerBoard) board.add(new ImageView(player_hit), y, x);
-                        else board.add(new ImageView(enemy_hit), y, x);
+                        if (board == playerBoard) board.add(new ImageView(player_hit), x, y);
+                        else board.add(new ImageView(enemy_hit), x, y);
                         break;
 
                     case STATUS_SUNK:
-                        board.add(new ImageView(sunk), y, x);
+                        board.add(new ImageView(sunk), x, y);
                         break;
                 }
 
