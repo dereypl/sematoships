@@ -1,0 +1,44 @@
+
+
+.startButton{
+    -fx-background-color: #010409;
+    -fx-pref-width: 280px;
+    -fx-pref-height: 50px;
+}
+
+.closeButton{
+    -fx-background-image: url("../resources/assets/close_icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 36 36;
+    -fx-background-position: center;
+}
+
+.input{
+    -fx-text-fill: white;
+}
+
+#headerPane{
+    -fx-background-image: url("../resources/assets/header.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1300 50;
+    -fx-background-position: center;
+}
+#content_home_pane{
+    -fx-background-image: url("../resources/assets/background.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1300 650;
+    -fx-background-position: center;
+}
+
+.noBackground{
+    -fx-background-color:transparent;
+}
+
+.actionButton{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: #272727;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 35px;
+    -fx-opacity: 0.5;
+}
