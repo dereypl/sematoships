@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="content_home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.boards.BoardsController">
+   <children>
+      <Text fx:id="playerNameLabel" fill="#dadada" layoutX="62.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
+         <font>
+            <Font size="25.0" />
+         </font></Text>
+      <ImageView fitHeight="417.0" fitWidth="423.0" layoutX="61.0" layoutY="166.0">
+         <image>
+            <Image url="@../../resources/assets/your_board.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="417.0" fitWidth="423.0" layoutX="800.0" layoutY="166.0">
+         <image>
+            <Image url="@../../resources/assets/enemy_board.png" />
+         </image>
+      </ImageView>
+      <Text fill="#dadada" layoutX="800.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="897.0" layoutY="606.0">
+         <image>
+            <Image url="@../../resources/assets/enemy_hit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1117.0" layoutY="606.0">
+         <image>
+            <Image url="@../../resources/assets/enemy_missed.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="507.0" layoutY="543.0">
+         <image>
+            <Image url="@../../resources/assets/your_ship_hit.png" />
+         </image>
+      </ImageView>
+      <Text fill="#00f0ff" layoutX="62.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Twoja plansza">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="388.0" layoutY="607.0">
+         <image>
+            <Image url="@../../resources/assets/your_ship.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="191.0" layoutY="607.0">
+         <image>
+            <Image url="@../../resources/assets/your_ship_hit.png" />
+         </image>
+      </ImageView>
+      <Text fill="#dadada" layoutX="415.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Twój statek">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#dadada" layoutX="218.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trafiono Twój statek">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1012.0" layoutY="392.0">
+         <image>
+            <Image url="@../../resources/assets/enemy_hit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1012.0" layoutY="336.0">
+         <image>
+            <Image url="@../../resources/assets/enemy_missed.png" />
+         </image>
+      </ImageView>
+      <Text fill="#dadada" layoutX="1144.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nie trafiono">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#dadada" layoutX="924.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trafiono statek przeciwnika">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#dd0b0b" layoutX="547.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oczenikwanie na ruch przeciwnika" textAlignment="CENTER" wrappingWidth="180.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text fill="#ec1c2d" layoutX="800.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przeciwnik">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="172.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="212.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="252.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="292.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="253.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="372.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="412.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="452.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="413.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="332.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="492.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="193.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="233.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="273.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="313.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="353.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="393.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="433.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="113.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="153.0" layoutY="532.0">
+         <image>
+            <Image url="@../../resources/assets/water.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
