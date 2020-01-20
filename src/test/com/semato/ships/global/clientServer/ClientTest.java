@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,9 +22,8 @@ public class ClientTest {
 
     @BeforeEach
     private void startConnection(TestInfo testInfo) throws IOException {
-        if(testInfo.getTags().contains("skipInit"))
-        {
-            return ;
+        if (testInfo.getTags().contains("skipInit")) {
+            return;
         }
         startConnection();
     }
@@ -37,9 +37,8 @@ public class ClientTest {
 
     @AfterEach
     private void stopConnection(TestInfo testInfo) throws IOException {
-        if(testInfo.getTags().contains("skipInit"))
-        {
-            return ;
+        if (testInfo.getTags().contains("skipInit")) {
+            return;
         }
         stopConnection();
     }
@@ -91,6 +90,41 @@ public class ClientTest {
             executorService.submit(parallelTask);
         }
 
+        try {
+            executorService.awaitTermination(10000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        executorService.shutdown();
+    }
+
+    @Test
+    @Tag("skipInit")
+    public void startGameByTwoUser() {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        Random random = new Random();
+        for (int i = 0; i < 2; i++) {
+            Runnable taskFirstUser = () -> {
+                try {
+                    Thread.sleep(random.nextInt(3000));
+                    System.out.println(LocalDateTime.now() + " " + "User want to get to the game!");
+                    Socket clientSocket = new Socket("localhost", 5000);
+                    ObjectOutputStream outObj = new ObjectOutputStream(clientSocket.getOutputStream());
+                    ObjectInputStream inObj = new ObjectInputStream(clientSocket.getInputStream());
+                    outObj.writeObject(new StartGameRequest("User_first"));
+                    System.out.println(LocalDateTime.now() + " " + "User clicks start game!");
+                    StartGameResponse response = (StartGameResponse) inObj.readObject();
+                    System.out.println(LocalDateTime.now() + " " + response.getResponseName());
+                    outObj.writeObject(new EndConnectionRequest());
+                    inObj.close();
+                    outObj.close();
+                    stopConnection();
+                } catch (IOException | ClassNotFoundException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            };
+            executorService.submit(taskFirstUser);
+        }
         try {
             executorService.awaitTermination(10000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {

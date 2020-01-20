@@ -12,7 +12,7 @@ public class RequestHandler extends Thread {
     private ObjectOutputStream outObj;
     private ObjectInputStream inObj;
 
-    protected RequestHandler(Socket connection) {
+    public RequestHandler(Socket connection) {
         this.connection = connection;
         ServerTcp.increaseCountOfUsers();
     }
@@ -31,6 +31,9 @@ public class RequestHandler extends Thread {
                 if(object instanceof StartGameRequest){
                     StartGameRequest startGameRequest = (StartGameRequest) object;
                     System.out.println(startGameRequest.getNick());
+                    while(ServerTcp.getCountUsers() % 2 != 0){
+
+                    }
                     outObj.writeObject(new StartGameResponse());
                 }
 
