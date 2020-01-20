@@ -22,6 +22,7 @@ public class Context {
     private Context() {
 
         myBoard = new Board();
+        enemyBoard = new Board();
         BoardGenerator boardGenerator = new BoardGenerator();
         boardGenerator.putShips(myBoard);
     }
