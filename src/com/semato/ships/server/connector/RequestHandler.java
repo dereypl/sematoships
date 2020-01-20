@@ -3,6 +3,7 @@ package com.semato.ships.server.connector;
 import com.semato.ships.global.payload.EndConnectionRequest;
 import com.semato.ships.global.payload.StartGameRequest;
 import com.semato.ships.global.payload.StartGameResponse;
+import com.semato.ships.server.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,6 +12,9 @@ public class RequestHandler extends Thread {
     private Socket connection;
     private ObjectOutputStream outObj;
     private ObjectInputStream inObj;
+    private User user;
+    private User enemy;
+
 
     public RequestHandler(Socket connection) {
         this.connection = connection;
@@ -28,26 +32,26 @@ public class RequestHandler extends Thread {
 
             while (!isTerminated) {
                 Object object = inObj.readObject();
-                if(object instanceof StartGameRequest){
+                if (object instanceof StartGameRequest) {
                     StartGameRequest startGameRequest = (StartGameRequest) object;
-                    System.out.println(startGameRequest.getNick());
-                    while(ServerTcp.getCountUsers() % 2 != 0){
-
+                    this.user = new User(startGameRequest.getNick(), startGameRequest.getMyBoard());
+                    PairingService.getInstance().addRequestHandler(this);
+                    while(enemy == null){
+                        Thread.sleep(100);
                     }
-                    outObj.writeObject(new StartGameResponse());
+                    outObj.writeObject(new StartGameResponse(enemy.getUsername(), enemy.getBoard()));
                 }
 
-                if(object instanceof EndConnectionRequest){
+                if (object instanceof EndConnectionRequest) {
                     EndConnectionRequest endConnectionRequest = (EndConnectionRequest) object;
-                    System.out.println(endConnectionRequest.getRequestName());
+                    System.out.println(endConnectionRequest.getMessageName());
                     isTerminated = true;
                 }
-
 
             }
 
             endConnection();
-        } catch (IOException ex) {
+        } catch (IOException | InterruptedException ex) {
             ServerTcp.decreaseCountOfUsers();
             System.err.println(ex);
         } catch (ClassNotFoundException e) {
@@ -60,5 +64,14 @@ public class RequestHandler extends Thread {
         outObj.close();
         inObj.close();
         connection.close();
+    }
+
+    public RequestHandler setEnemy(User enemy){
+        this.enemy = enemy;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

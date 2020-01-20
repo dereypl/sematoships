@@ -2,10 +2,17 @@ package com.semato.ships.client.ui.playerinfo;
 
 
 import com.jfoenix.controls.JFXTextField;
+import com.semato.ships.client.Context;
+import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.boards.BoardsController;
 import com.semato.ships.client.ui.wrapper.WrapperController;
+import com.semato.ships.global.payload.StartGameRequest;
+import com.semato.ships.global.payload.StartGameResponse;
+import com.sun.security.ntlm.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class PlayerInfoController {
 
@@ -31,10 +38,21 @@ public class PlayerInfoController {
         if (input.getText().trim().isEmpty()) {
             errorLabel.setText("Nie można rozpocząć gry, bez ustalonego pseudonimu!");
         } else {
-
-            //TODO: connection start => request with nick and player board
+            ClientTcp.getInstance().startConnection("localhost", 5000);
+            StartGameResponse startGameResponse = startGame(input.getText());
+            System.out.println(startGameResponse.getEnemyNick());
             WrapperController.getInstance().changeContentToBoards();
             BoardsController.getInstance().playerNameLabel.setText(input.getText());
         }
+    }
+
+    private StartGameResponse startGame(String nick){
+        try {
+            ClientTcp.getInstance().getOutObj().writeObject(new StartGameRequest(nick, Context.getInstance().getMyBoard()));
+            return (StartGameResponse) ClientTcp.getInstance().getInObj().readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

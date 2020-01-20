@@ -1,6 +1,7 @@
 package com.semato.ships.client.ui.wrapper;
 
 
+import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,8 +40,9 @@ public class WrapperController extends MainController {
 
    @FXML
     void handleCloseButtonAction(MouseEvent event) {
+        ClientTcp.getInstance().stopConnection();
         System.exit(0);
-    } //TODO: end connection here!!
+    }
 
 
 

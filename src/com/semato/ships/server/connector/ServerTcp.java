@@ -9,9 +9,11 @@ public class ServerTcp {
     private boolean serverIsRunning;
     private static volatile int countUsers;
 
+
     public void runServer(int port) {
         try {
             serverSocket = new ServerSocket(port);
+            PairingService.getInstance().run();
             System.out.println("Server started");
             serverIsRunning = true;
             while (serverIsRunning) {
