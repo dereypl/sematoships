@@ -70,17 +70,10 @@ public class WrapperController extends MainController {
         setContentPage(contentPane, "/com/semato/ships/client/ui/home/home.fxml");
     }
 
-//    @FXML
-//    public void changeContentToRepertoire() {
-//        try {
-//            AnchorPane temp;
-//            temp = FXMLLoader.load(getClass().getResource("/main/java/Cinemato/ui/header/header.fxml"));
-//            headerPane.getChildren().add((Node) temp);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        setContentPage(contentPane, "/main/java/Cinemato/ui/repertoire/repertoire.fxml");
-//    }
+    @FXML
+    public void changeContentToHome() {
+        setContentPage(contentPane, "/com/semato/ships/client/ui/home/home.fxml");
+    }
 
     @FXML
     public void changeContentToPlayerInfo() {
