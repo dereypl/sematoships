@@ -1,6 +1,8 @@
 package com.semato.ships.client.connector;
 
-import com.semato.ships.global.payload.EndConnectionRequest;
+import com.semato.ships.client.Context;
+import com.semato.ships.global.Board;
+import com.semato.ships.global.payload.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -69,4 +71,25 @@ public class ClientTcp {
         return this.inObj;
     }
 
+    public StartGameResponse sendStartGameRequest(String nick) {
+        try {
+            outObj.writeObject(new StartGameRequest(nick, Context.getInstance().getMyBoard()));
+            return (StartGameResponse) inObj.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BoardResponse sendBoard(Board board){
+        try {
+            outObj.writeObject(new BoardRequest(board));
+            return (BoardResponse) inObj.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

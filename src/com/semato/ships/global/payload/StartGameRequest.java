@@ -4,12 +4,13 @@ import com.semato.ships.global.Board;
 
 import java.io.Serializable;
 
-public class StartGameRequest implements Serializable {
+public class StartGameRequest extends Message {
 
     private String nick;
     private Board myBoard;
 
     public StartGameRequest(String nick, Board myBoard){
+        super("Start game request");
         this.nick = nick;
         this.myBoard = myBoard;
     }

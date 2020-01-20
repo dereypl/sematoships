@@ -2,15 +2,14 @@ package com.semato.ships.global.payload;
 
 import com.semato.ships.global.Board;
 
-import java.io.Serializable;
 
-public class StartGameResponse extends Message implements Serializable {
+public class StartGameResponse extends Message {
 
     String enemyNick;
     Board enemyBoard;
 
     public StartGameResponse(String enemyNick, Board enemyBoard) {
-        super("startGame");
+        super("Start game response");
         this.enemyNick = enemyNick;
         this.enemyBoard = enemyBoard;
     }

@@ -26,4 +26,6 @@ public class User {
 
     public Board getBoard() { return this.board; }
 
+    public void setBoard(Board board) { this.board = board;}
+
 }

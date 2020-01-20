@@ -1,7 +1,10 @@
 package com.semato.ships.client.ui.boards;
 
 import com.semato.ships.client.Context;
+import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.wrapper.WrapperController;
+import com.semato.ships.global.Board;
+import com.semato.ships.global.payload.BoardResponse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,7 +59,7 @@ public class BoardsController implements Initializable {
 
     @FXML
     void handleQuitGameAction(ActionEvent event) {
-        //TODO: @TOMEK please remember to close connection before view change!
+        ClientTcp.getInstance().stopConnection();
         WrapperController.getInstance().changeContentToHome();
     }
 
@@ -70,6 +75,7 @@ public class BoardsController implements Initializable {
 
     private void fillBoard(GridPane board) {
 
+        board.getChildren().removeAll();
         int fieldStatus;
         boolean isPlayerBoard = (board == playerBoard);
 
@@ -86,7 +92,7 @@ public class BoardsController implements Initializable {
                             board.add(new ImageView(enemy_water), x, y);
                             int finalX = x;
                             int finalY = y;
-                            board.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY)); //TODO: shoot request to server (send enemy board)
+                            board.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> doShot(finalX, finalY)); //TODO: shoot request to server (send enemy board)
                         }
                         break;
 
@@ -119,4 +125,21 @@ public class BoardsController implements Initializable {
         fillBoard(enemyBoard);
         showEnemyMoveText();
     }
+
+    private void doShot(int x, int y){
+        System.out.println("X: " + x + ", Y:" + y);
+        Context.getInstance().getEnemyBoard().shoot(x, y);
+//        fillBoard(enemyBoard);
+        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard(Context.getInstance().getEnemyBoard());
+        Context.getInstance().setMyBoard(boardResponse.getBoard());
+        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(false));
+        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(true));
+        System.out.println(Context.getInstance().getMyBoard().getBoardPlan(false));
+        System.out.println(Context.getInstance().getMyBoard().getBoardPlan(true));
+
+//        fillBoard(playerBoard);
+
+    }
+
+
 }

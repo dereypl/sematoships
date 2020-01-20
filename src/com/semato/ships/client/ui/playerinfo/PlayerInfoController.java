@@ -39,21 +39,11 @@ public class PlayerInfoController {
             errorLabel.setText("Nie można rozpocząć gry, bez ustalonego pseudonimu!");
         } else {
             ClientTcp.getInstance().startConnection("localhost", 5000);
-            StartGameResponse startGameResponse = startGame(input.getText());
+            StartGameResponse startGameResponse = ClientTcp.getInstance().sendStartGameRequest(input.getText()); //TODO: obsluga bledu na wypadek nulla
             Context.getInstance().setEnemyBoard(startGameResponse.getEnemyBoard());
             WrapperController.getInstance().changeContentToBoards();
             BoardsController.getInstance().playerNameLabel.setText(input.getText());
             BoardsController.getInstance().enemyNameLabel.setText(startGameResponse.getEnemyNick());
         }
-    }
-
-    private StartGameResponse startGame(String nick){
-        try {
-            ClientTcp.getInstance().getOutObj().writeObject(new StartGameRequest(nick, Context.getInstance().getMyBoard()));
-            return (StartGameResponse) ClientTcp.getInstance().getInObj().readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

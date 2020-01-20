@@ -1,8 +1,6 @@
 package com.semato.ships.server.connector;
 
-import com.semato.ships.global.payload.EndConnectionRequest;
-import com.semato.ships.global.payload.StartGameRequest;
-import com.semato.ships.global.payload.StartGameResponse;
+import com.semato.ships.global.payload.*;
 import com.semato.ships.server.User;
 
 import java.io.*;
@@ -31,10 +29,11 @@ public class RequestHandler extends Thread {
             boolean isTerminated = false;
 
             while (!isTerminated) {
-                Object object = inObj.readObject();
-                if (object instanceof StartGameRequest) {
-                    StartGameRequest startGameRequest = (StartGameRequest) object;
+                Object request = inObj.readObject();
+                if (request instanceof StartGameRequest) {
+                    StartGameRequest startGameRequest = (StartGameRequest) request;
                     this.user = new User(startGameRequest.getNick(), startGameRequest.getMyBoard());
+                    System.out.println(user.getUsername() + ": " + startGameRequest.getName());
                     PairingService.getInstance().addRequestHandler(this);
                     while(enemy == null){
                         Thread.sleep(100);
@@ -42,9 +41,19 @@ public class RequestHandler extends Thread {
                     outObj.writeObject(new StartGameResponse(enemy.getUsername(), enemy.getBoard()));
                 }
 
-                if (object instanceof EndConnectionRequest) {
-                    EndConnectionRequest endConnectionRequest = (EndConnectionRequest) object;
-                    System.out.println(endConnectionRequest.getMessageName());
+                if (request instanceof BoardRequest){
+                    BoardRequest boardRequest = (BoardRequest) request;
+                    System.out.println(user.getUsername() + ": " + boardRequest.getName());
+                    enemy.setBoard(boardRequest.getBoard());
+                    outObj.writeObject(new BoardResponse(user.getBoard()));
+
+                }
+
+                if (request instanceof EndConnectionRequest) {
+                    EndConnectionRequest endConnectionRequest = (EndConnectionRequest) request;
+                    if(user != null ) {
+                        System.out.println(user.getUsername() + " " + endConnectionRequest.getName());
+                    }
                     isTerminated = true;
                 }
 
