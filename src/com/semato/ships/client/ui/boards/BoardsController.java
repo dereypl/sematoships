@@ -106,7 +106,6 @@ public class BoardsController implements Initializable {
 
         fillBoard(playerBoard);
         fillBoard(enemyBoard);
-
         showEnemyMoveText();
     }
 }

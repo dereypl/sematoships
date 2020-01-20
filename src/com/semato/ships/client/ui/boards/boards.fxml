@@ -123,11 +123,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <ImageView fitHeight="147.0" fitWidth="250.0" layoutX="525.0" layoutY="9.0">
-         <image>
-            <Image url="@../../resources/assets/logo.png" />
-         </image>
-      </ImageView>
       <Pane layoutX="60.0" layoutY="156.0" prefHeight="5.0" prefWidth="423.0" style="-fx-background-color: #00f0ff;" />
       <Pane layoutX="60.0" layoutY="595.0" prefHeight="5.0" prefWidth="423.0" style="-fx-background-color: #00f0ff;" />
       <Pane layoutX="800.0" layoutY="156.0" prefHeight="5.0" prefWidth="423.0" style="-fx-background-color: #dd0b0b;" />
@@ -158,5 +153,10 @@
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+      <ImageView fitHeight="146.0" fitWidth="200.0" layoutX="530.0" layoutY="27.0">
+         <image>
+            <Image url="@../../resources/assets/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
