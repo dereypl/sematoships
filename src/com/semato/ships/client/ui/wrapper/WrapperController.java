@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 
 public class WrapperController extends MainController {
 
-
     @FXML
     private ImageView CloseButton;
 
@@ -38,10 +37,11 @@ public class WrapperController extends MainController {
         ((Stage) CloseButton.getScene().getWindow()).close();
     }
 
-    @FXML
+   @FXML
     void handleCloseButtonAction(MouseEvent event) {
         System.exit(0);
-    }
+    } //TODO: end connection here!!
+
 
 
     private void setNode(Node node){
@@ -89,15 +89,4 @@ public class WrapperController extends MainController {
     public void changeContentToBoards() {
         setContentPage(contentPane, "/com/semato/ships/client/ui/boards/boards.fxml");
     }
-//
-//    @FXML
-//    public void changeContentToReservationStatus() {
-//        setContentPage(contentPane, "/main/java/Cinemato/ui/reservation/status/status.fxml");
-//    }
-//
-//    @FXML
-//    public void backToRepertoire(MouseEvent event) {
-//        setContentPage(contentPane, "/main/java/Cinemato/ui/repertoire/repertoire.fxml");
-//    }
-
 }

@@ -1,13 +1,10 @@
 package com.semato.ships.client.ui.boards;
 
 import com.semato.ships.client.Context;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -18,17 +15,20 @@ import static com.semato.ships.global.Board.*;
 
 public class BoardsController implements Initializable {
 
-    Image ship = new Image("com/semato/ships/client/resources/assets/your_ship.png");
-    Image sunk = new Image("com/semato/ships/client/resources/assets/ship_sunk.png");
-    Image water = new Image("com/semato/ships/client/resources/assets/water.png");
-    Image enemy_water = new Image("com/semato/ships/client/resources/assets/enemy_water.png");
-    Image player_miss = new Image("com/semato/ships/client/resources/assets/shoot_missed.png");
-    Image player_hit = new Image("com/semato/ships/client/resources/assets/your_ship_hit.png");
-    Image enemy_miss = new Image("com/semato/ships/client/resources/assets/shoot_missed.png");
-    Image enemy_hit = new Image("com/semato/ships/client/resources/assets/enemy_hit.png");
+    private Image ship = new Image("com/semato/ships/client/resources/assets/your_ship.png");
+    private Image sunk = new Image("com/semato/ships/client/resources/assets/ship_sunk.png");
+    private Image water = new Image("com/semato/ships/client/resources/assets/water.png");
+    private Image enemy_water = new Image("com/semato/ships/client/resources/assets/enemy_water.png");
+    private Image player_miss = new Image("com/semato/ships/client/resources/assets/shoot_missed.png");
+    private Image player_hit = new Image("com/semato/ships/client/resources/assets/your_ship_hit.png");
+    private Image enemy_miss = new Image("com/semato/ships/client/resources/assets/shoot_missed.png");
+    private Image enemy_hit = new Image("com/semato/ships/client/resources/assets/enemy_hit.png");
 
     @FXML
     private GridPane playerBoard;
+
+    @FXML
+    private GridPane enemyBoard;
 
     @FXML
     public Text playerNameLabel;
@@ -46,23 +46,25 @@ public class BoardsController implements Initializable {
     private void fillBoard(GridPane board) {
 
         int fieldStatus;
+        boolean isPlayerBoard = (board == playerBoard);
 
         for (int y = 0; y < DIMENSION; y++) {
             for (int x = 0; x < DIMENSION; x++) {
 
-                if (board == playerBoard) fieldStatus = Context.getInstance().getMyBoard().getStatus(x, y);
+                if (isPlayerBoard) fieldStatus = Context.getInstance().getMyBoard().getStatus(x, y);
                 else fieldStatus = Context.getInstance().getEnemyBoard().getStatusForEnemy(x, y);
 
                 switch (fieldStatus) {
                     case STATUS_WATER:
-                        if (board == playerBoard) board.add(new ImageView(water), x, y);
+                        if (isPlayerBoard) board.add(new ImageView(water), x, y);
                         else {
                             board.add(new ImageView(enemy_water), x, y);
                         }
 
                         int finalX = x;
                         int finalY = y;
-                        playerBoard.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY));
+                        if (isPlayerBoard) playerBoard.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY));
+                        //TODO: shoot request to server (send enemy board)
                         break;
 
                     case STATUS_SHIP:
@@ -70,12 +72,12 @@ public class BoardsController implements Initializable {
                         break;
 
                     case STATUS_MISS:
-                        if (board == playerBoard) board.add(new ImageView(player_miss), x, y);
+                        if (isPlayerBoard) board.add(new ImageView(player_miss), x, y);
                         else board.add(new ImageView(enemy_miss), x, y);
                         break;
 
                     case STATUS_HIT:
-                        if (board == playerBoard) board.add(new ImageView(player_hit), x, y);
+                        if (isPlayerBoard) board.add(new ImageView(player_hit), x, y);
                         else board.add(new ImageView(enemy_hit), x, y);
                         break;
 
@@ -92,5 +94,6 @@ public class BoardsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         fillBoard(playerBoard);
+
     }
 }
