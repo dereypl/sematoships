@@ -29,7 +29,7 @@ public class PairingService extends Thread {
 
     @Override
     public void run() {
-        System.out.println("PairingService run!");
+        System.out.println("PairingService has been run!");
         while (true) {
             if (requestHandlerList.size() >= 2) {
                 RequestHandler requestHandler1 = requestHandlerList.pop();
@@ -38,7 +38,6 @@ public class PairingService extends Thread {
                 requestHandler2.setEnemy(requestHandler1.getUser());
             }
             try {
-                System.out.println("Dupa!");
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

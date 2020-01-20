@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="content_home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.boards.BoardsController">
+<AnchorPane id="content_home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.boards.BoardsController">
    <children>
       <Text fx:id="playerNameLabel" fill="#dadada" layoutX="233.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player1">
          <font>
@@ -26,7 +26,7 @@
             <Image url="@../../resources/assets/enemy_board.png" />
          </image>
       </ImageView>
-      <Text fill="#dadada" layoutX="971.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player2">
+      <Text fx:id="enemyNameLabel" fill="#dadada" layoutX="971.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player2">
          <font>
             <Font size="25.0" />
          </font>

@@ -33,6 +33,9 @@ public class BoardsController implements Initializable {
     @FXML
     public Text playerNameLabel;
 
+    @FXML
+    public Text enemyNameLabel;
+
     private static BoardsController instance;
 
     public BoardsController() {

@@ -18,4 +18,8 @@ public class StartGameResponse extends Message implements Serializable {
     public String getEnemyNick() {
         return enemyNick;
     }
+
+    public Board getEnemyBoard() {
+        return enemyBoard;
+    }
 }

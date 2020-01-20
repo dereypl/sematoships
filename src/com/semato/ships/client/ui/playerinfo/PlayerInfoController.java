@@ -40,9 +40,10 @@ public class PlayerInfoController {
         } else {
             ClientTcp.getInstance().startConnection("localhost", 5000);
             StartGameResponse startGameResponse = startGame(input.getText());
-            System.out.println(startGameResponse.getEnemyNick());
+            Context.getInstance().setEnemyBoard(startGameResponse.getEnemyBoard());
             WrapperController.getInstance().changeContentToBoards();
             BoardsController.getInstance().playerNameLabel.setText(input.getText());
+            BoardsController.getInstance().enemyNameLabel.setText(startGameResponse.getEnemyNick());
         }
     }
 
