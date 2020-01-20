@@ -31,6 +31,8 @@ public class PlayerInfoController {
         if (input.getText().trim().isEmpty()) {
             errorLabel.setText("Nie można rozpocząć gry, bez ustalonego pseudonimu!");
         } else {
+
+            //TODO: connection start => request with nick and player board
             WrapperController.getInstance().changeContentToBoards();
             BoardsController.getInstance().playerNameLabel.setText(input.getText());
         }
