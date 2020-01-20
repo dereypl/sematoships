@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -153,10 +155,15 @@
             <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <ImageView fitHeight="146.0" fitWidth="200.0" layoutX="530.0" layoutY="27.0">
+      <ImageView fitHeight="146.0" fitWidth="200.0" layoutX="550.0" layoutY="17.0">
          <image>
             <Image url="@../../resources/assets/logo.png" />
          </image>
       </ImageView>
+      <JFXButton alignment="CENTER" layoutX="500.0" layoutY="180.0" onAction="#handleQuitGameAction" prefHeight="33.0" prefWidth="200.0" ripplerFill="#1f1f1f33" styleClass="startButton" text="OPUŚC ROZGRYWKĘ &gt;" textAlignment="CENTER" textFill="#00a4c2">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </JFXButton>
    </children>
 </AnchorPane>

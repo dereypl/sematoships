@@ -1,6 +1,8 @@
 package com.semato.ships.client.ui.boards;
 
 import com.semato.ships.client.Context;
+import com.semato.ships.client.ui.wrapper.WrapperController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -45,6 +47,12 @@ public class BoardsController implements Initializable {
 
     public static BoardsController getInstance() {
         return instance;
+    }
+
+    @FXML
+    void handleQuitGameAction(ActionEvent event) {
+        //TODO: @TOMEK please remember to close connection before view change!
+        WrapperController.getInstance().changeContentToHome();
     }
 
     public void showEnemyMoveText(){
