@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -31,6 +32,9 @@ public class BoardsController implements Initializable {
     private GridPane enemyBoard;
 
     @FXML
+    private Text gameStatusInfo;
+
+    @FXML
     public Text playerNameLabel;
 
     private static BoardsController instance;
@@ -41,6 +45,16 @@ public class BoardsController implements Initializable {
 
     public static BoardsController getInstance() {
         return instance;
+    }
+
+    public void showEnemyMoveText(){
+        gameStatusInfo.setText("Oczekiwanie na ruch przeciwnika...");
+        gameStatusInfo.setFill(Color.rgb(236, 28, 45));
+    }
+
+    public void showPlayerMoveText(){
+        gameStatusInfo.setText("Twoja kolej!");
+        gameStatusInfo.setFill(Color.rgb(0, 240, 255));
     }
 
     private void fillBoard(GridPane board) {
@@ -59,12 +73,10 @@ public class BoardsController implements Initializable {
                         if (isPlayerBoard) board.add(new ImageView(water), x, y);
                         else {
                             board.add(new ImageView(enemy_water), x, y);
+                            int finalX = x;
+                            int finalY = y;
+                            board.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY)); //TODO: shoot request to server (send enemy board)
                         }
-
-                        int finalX = x;
-                        int finalY = y;
-                        if (isPlayerBoard) playerBoard.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> System.out.println("X: " + finalX + " Y: " + finalY));
-                        //TODO: shoot request to server (send enemy board)
                         break;
 
                     case STATUS_SHIP:
@@ -85,7 +97,6 @@ public class BoardsController implements Initializable {
                         board.add(new ImageView(sunk), x, y);
                         break;
                 }
-
             }
         }
     }
@@ -94,6 +105,8 @@ public class BoardsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         fillBoard(playerBoard);
+        fillBoard(enemyBoard);
 
+        showEnemyMoveText();
     }
 }
