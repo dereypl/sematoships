@@ -4,14 +4,14 @@ import com.semato.ships.global.Board;
 
 public class BoardRequest extends Message {
 
-    private Board enemyBoard;
+    private String enemyBoard;
 
     public BoardRequest(Board enemyBoard) {
         super("Board request ");
-        this.enemyBoard = enemyBoard;
+        this.enemyBoard = Board.serialize(enemyBoard);
     }
 
     public Board getEnemyBoard() {
-        return enemyBoard;
+        return Board.unserialize(enemyBoard);
     }
 }

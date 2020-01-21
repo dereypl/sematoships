@@ -4,7 +4,7 @@ import com.semato.ships.global.Board;
 
 public class BoardResponse extends Message {
 
-    Board myBoard;
+    private Board myBoard;
 
     public BoardResponse(Board myBoard) {
         super("Board response");

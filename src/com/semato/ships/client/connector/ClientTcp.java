@@ -2,6 +2,7 @@ package com.semato.ships.client.connector;
 
 import com.semato.ships.client.Context;
 import com.semato.ships.client.ui.wrapper.WrapperController;
+import com.semato.ships.global.Board;
 import com.semato.ships.global.payload.*;
 
 import java.io.IOException;
@@ -83,7 +84,8 @@ public class ClientTcp {
 
     public BoardResponse sendBoard(){
         try {
-            outObj.writeObject(new BoardRequest(Context.getInstance().getEnemyBoard()));
+            Board boardE = Context.getInstance().getEnemyBoard();
+            outObj.writeObject(new BoardRequest(boardE));
             return (BoardResponse) inObj.readObject();
         } catch (IOException e) {
             e.printStackTrace();

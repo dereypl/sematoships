@@ -151,7 +151,10 @@ public class BoardsController implements Initializable {
         Context.getInstance().setEnemyTurn(true);
         checkWhoseTurnIs();
         fillBoard(enemyBoard);
-        new Thread(sendBoardRequest).start();
+        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
+//        new Thread(sendBoardRequest).start();
+        Context.getInstance().setMyBoard(boardResponse.getMyBoard());
+        Context.getInstance().setEnemyTurn(false);
         fillBoard(playerBoard);
     }
 
