@@ -43,9 +43,9 @@ public class PlayerInfoController {
             StartGameResponse startGameResponse = ClientTcp.getInstance().sendStartGameRequest(input.getText()); //TODO: obsluga bledu na wypadek nulla
             Context.getInstance().setEnemyBoard(startGameResponse.getEnemyBoard());
             Context.getInstance().setEnemyTurn(startGameResponse.isEnemyTurn());
+            Context.getInstance().setEnemyNick(startGameResponse.getEnemyNick());
+            Context.getInstance().setPlayerNick(input.getText());
             WrapperController.getInstance().changeContentToBoards();
-            BoardsController.getInstance().playerNameLabel.setText(input.getText());
-            BoardsController.getInstance().enemyNameLabel.setText(startGameResponse.getEnemyNick());
             if(startGameResponse.isEnemyTurn()){
                 BoardResponse boardResponse = ClientTcp.getInstance().sendEmptyRequest();
                 Context.getInstance().setMyBoard(boardResponse.getMyBoard());

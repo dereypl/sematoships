@@ -78,7 +78,7 @@ public class BoardsController implements Initializable {
 
     private void fillBoard(GridPane board) {
 
-        //board.getChildren().removeAll();
+//        board.getChildren().removeAll();
         int fieldStatus;
         boolean isPlayerBoard = (board == playerBoard);
 
@@ -123,6 +123,8 @@ public class BoardsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.playerNameLabel.setText(Context.getInstance().getPlayerNick());
+        this.enemyNameLabel.setText(Context.getInstance().getEnemyNick());
         fillBoard(playerBoard);
         fillBoard(enemyBoard);
     }
@@ -130,11 +132,9 @@ public class BoardsController implements Initializable {
     private void doShot(int x, int y) {
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
-//        WrapperController.getInstance().changeContentToBoards();
-//        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(false));
+        WrapperController.getInstance().changeContentToBoards();
         BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
         Context.getInstance().setMyBoard(boardResponse.getMyBoard());
-//        WrapperController.getInstance().changeContentToBoards();
     }
 
 }

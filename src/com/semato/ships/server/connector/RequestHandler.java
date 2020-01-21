@@ -51,7 +51,6 @@ public class RequestHandler extends Thread {
                     while(!user.isUserTurn()){
                         Thread.sleep(100);
                     }
-                    Thread.sleep(1000);
                     outObj.writeObject(new BoardResponse(user.getBoard()));
                 }
 

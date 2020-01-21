@@ -9,6 +9,8 @@ public class Context {
 
     private Board myBoard = null;
     private Board enemyBoard = null;
+    private String enemyNick;
+    private String playerNick;
     private boolean isEnemyTurn = false;
 
     public static Context getInstance() {
@@ -54,5 +56,21 @@ public class Context {
 
     public void reset() {
         instance = null;
+    }
+
+    public void setPlayerNick(String playerNick) {
+        this.playerNick = playerNick;
+    }
+
+    public void setEnemyNick(String enemyNick) {
+        this.enemyNick = enemyNick;
+    }
+
+    public String getEnemyNick() {
+        return enemyNick;
+    }
+
+    public String getPlayerNick() {
+        return playerNick;
     }
 }
