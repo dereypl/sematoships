@@ -4,7 +4,6 @@ import com.semato.ships.client.Context;
 import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.wrapper.WrapperController;
 import com.semato.ships.global.Board;
-import com.semato.ships.global.payload.BoardRequest;
 import com.semato.ships.global.payload.BoardResponse;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -51,8 +50,6 @@ public class BoardsController implements Initializable {
 
     private static BoardsController instance;
 
-    private boolean enemyTurn;
-
     public BoardsController() {
         instance = this;
     }
@@ -80,7 +77,7 @@ public class BoardsController implements Initializable {
 
     private void fillBoard(GridPane board) {
 
-//        board.getChildren().removeAll();
+        board.getChildren().clear();
         int fieldStatus;
         boolean isPlayerBoard = (board == playerBoard);
 
@@ -123,7 +120,6 @@ public class BoardsController implements Initializable {
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.playerNameLabel.setText(Context.getInstance().getPlayerNick());
@@ -143,15 +139,14 @@ public class BoardsController implements Initializable {
 
     private void doShot(int x, int y) {
         sendBoardRequest.setOnSucceeded(e -> {
-                    Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
-                    Context.getInstance().setEnemyTurn(true);
-                });
+            Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
+            Context.getInstance().setEnemyTurn(true);
+        });
 
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
-        WrapperController.getInstance().changeContentToBoards();
+        fillBoard(enemyBoard);
         new Thread(sendBoardRequest).start();
-
+        fillBoard(playerBoard);
     }
-
 }

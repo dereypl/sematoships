@@ -10,7 +10,7 @@
 
 <AnchorPane id="content_home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.semato.ships.client.ui.playerinfo.PlayerInfoController">
    <children>
-      <JFXButton alignment="CENTER" layoutX="485.0" layoutY="402.0" onAction="#handleStartGameAction" ripplerFill="#1f1f1f33" styleClass="startButton" text="ROZPOCZNIJ GRĘ &gt;" textAlignment="CENTER" textFill="#00a4c2">
+      <JFXButton fx:id="StartGameButton" alignment="CENTER" layoutX="485.0" layoutY="402.0" onAction="#handleStartGameAction" ripplerFill="#1f1f1f33" styleClass="startButton" text="ROZPOCZNIJ GRĘ &gt;" textAlignment="CENTER" textFill="#00a4c2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

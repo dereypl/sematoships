@@ -1,6 +1,7 @@
 package com.semato.ships.client.ui.playerinfo;
 
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.semato.ships.client.Context;
 import com.semato.ships.client.connector.ClientTcp;
@@ -25,6 +26,9 @@ public class PlayerInfoController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private JFXButton StartGameButton;
+
     private static PlayerInfoController instance;
 
     public PlayerInfoController() {
@@ -41,6 +45,7 @@ public class PlayerInfoController {
         if (input.getText().trim().isEmpty()) {
             errorLabel.setText("Nie można rozpocząć gry, bez ustalonego pseudonimu!");
         } else {
+            StartGameButton.setDisable(true);
             errorLabel.setText("Oczekiwanie na połączenie...");
 
             ClientTcp.getInstance().startConnection("localhost", 5000);
@@ -57,7 +62,6 @@ public class PlayerInfoController {
                     return ClientTcp.getInstance().sendEmptyRequest();
                 }
             };
-
 
             sendEmptyRequestTask.setOnSucceeded(e -> {
                 BoardResponse response = sendEmptyRequestTask.getValue();
