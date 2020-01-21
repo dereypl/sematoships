@@ -66,6 +66,8 @@ public class PlayerInfoController {
             sendEmptyRequestTask.setOnSucceeded(e -> {
                 BoardResponse response = sendEmptyRequestTask.getValue();
                 Context.getInstance().setMyBoard(response.getMyBoard());
+                Context.getInstance().setEnemyTurn(false);
+                WrapperController.getInstance().changeContentToBoards();
             });
 
             startGameTask.setOnSucceeded(e -> {
