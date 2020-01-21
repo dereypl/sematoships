@@ -49,6 +49,8 @@ public class BoardsController implements Initializable {
 
     private static BoardsController instance;
 
+    private boolean enemyTurn;
+
     public BoardsController() {
         instance = this;
     }
@@ -60,22 +62,23 @@ public class BoardsController implements Initializable {
     @FXML
     void handleQuitGameAction(ActionEvent event) {
         ClientTcp.getInstance().stopConnection();
+        Context.getInstance().reset();
         WrapperController.getInstance().changeContentToHome();
     }
 
-    public void showEnemyMoveText(){
+    public void showEnemyMoveText() {
         gameStatusInfo.setText("Oczekiwanie na ruch przeciwnika...");
         gameStatusInfo.setFill(Color.rgb(236, 28, 45));
     }
 
-    public void showPlayerMoveText(){
+    public void showPlayerMoveText() {
         gameStatusInfo.setText("Twoja kolej!");
         gameStatusInfo.setFill(Color.rgb(0, 240, 255));
     }
 
     private void fillBoard(GridPane board) {
 
-        board.getChildren().removeAll();
+        //board.getChildren().removeAll();
         int fieldStatus;
         boolean isPlayerBoard = (board == playerBoard);
 
@@ -120,26 +123,18 @@ public class BoardsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         fillBoard(playerBoard);
         fillBoard(enemyBoard);
-        showEnemyMoveText();
     }
 
-    private void doShot(int x, int y){
+    private void doShot(int x, int y) {
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
-//        fillBoard(enemyBoard);
-        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard(Context.getInstance().getEnemyBoard());
-        Context.getInstance().setMyBoard(boardResponse.getBoard());
-        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(false));
-        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(true));
-        System.out.println(Context.getInstance().getMyBoard().getBoardPlan(false));
-        System.out.println(Context.getInstance().getMyBoard().getBoardPlan(true));
-
-//        fillBoard(playerBoard);
-
+//        WrapperController.getInstance().changeContentToBoards();
+//        System.out.println(Context.getInstance().getEnemyBoard().getBoardPlan(false));
+        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
+        Context.getInstance().setMyBoard(boardResponse.getMyBoard());
+//        WrapperController.getInstance().changeContentToBoards();
     }
-
 
 }

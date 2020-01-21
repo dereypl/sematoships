@@ -3,21 +3,13 @@ package com.semato.ships.server;
 import com.semato.ships.global.Board;
 
 public class User {
-    private boolean isFree = false;
     private String username;
     private Board board;
+    private boolean isUserTurn = false;
 
     public User(String username, Board board){
         this.username = username;
         this.board = board;
-    }
-
-    public boolean isFree(){
-        return this.isFree;
-    }
-
-    public void changeState(){
-        isFree = true;
     }
 
     public String getUsername(){
@@ -28,4 +20,11 @@ public class User {
 
     public void setBoard(Board board) { this.board = board;}
 
+    public boolean isUserTurn() {
+        return isUserTurn;
+    }
+
+    public void setUserTurn(boolean userTurn) {
+        isUserTurn = userTurn;
+    }
 }

@@ -34,6 +34,8 @@ public class PairingService extends Thread {
             if (requestHandlerList.size() >= 2) {
                 RequestHandler requestHandler1 = requestHandlerList.pop();
                 RequestHandler requestHandler2 = requestHandlerList.pop();
+                requestHandler1.getUser().setUserTurn(true);
+                requestHandler2.getUser().setUserTurn(false);
                 requestHandler1.setEnemy(requestHandler2.getUser());
                 requestHandler2.setEnemy(requestHandler1.getUser());
             }

@@ -6,6 +6,7 @@ import com.semato.ships.client.Context;
 import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.boards.BoardsController;
 import com.semato.ships.client.ui.wrapper.WrapperController;
+import com.semato.ships.global.payload.BoardResponse;
 import com.semato.ships.global.payload.StartGameRequest;
 import com.semato.ships.global.payload.StartGameResponse;
 import com.sun.security.ntlm.Client;
@@ -41,9 +42,14 @@ public class PlayerInfoController {
             ClientTcp.getInstance().startConnection("localhost", 5000);
             StartGameResponse startGameResponse = ClientTcp.getInstance().sendStartGameRequest(input.getText()); //TODO: obsluga bledu na wypadek nulla
             Context.getInstance().setEnemyBoard(startGameResponse.getEnemyBoard());
+            Context.getInstance().setEnemyTurn(startGameResponse.isEnemyTurn());
             WrapperController.getInstance().changeContentToBoards();
             BoardsController.getInstance().playerNameLabel.setText(input.getText());
             BoardsController.getInstance().enemyNameLabel.setText(startGameResponse.getEnemyNick());
+            if(startGameResponse.isEnemyTurn()){
+                BoardResponse boardResponse = ClientTcp.getInstance().sendEmptyRequest();
+                Context.getInstance().setMyBoard(boardResponse.getMyBoard());
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ public class Context {
 
     private Board myBoard = null;
     private Board enemyBoard = null;
+    private boolean isEnemyTurn = false;
 
     public static Context getInstance() {
 
@@ -43,4 +44,15 @@ public class Context {
         return enemyBoard;
     }
 
+    public boolean isEnemyTurn() {
+        return isEnemyTurn;
+    }
+
+    public void setEnemyTurn(boolean enemyTurn) {
+        isEnemyTurn = enemyTurn;
+    }
+
+    public void reset() {
+        instance = null;
+    }
 }

@@ -7,11 +7,13 @@ public class StartGameResponse extends Message {
 
     String enemyNick;
     Board enemyBoard;
+    boolean isEnemyTurn;
 
-    public StartGameResponse(String enemyNick, Board enemyBoard) {
+    public StartGameResponse(String enemyNick, Board enemyBoard, boolean isEnemyTurn) {
         super("Start game response");
         this.enemyNick = enemyNick;
         this.enemyBoard = enemyBoard;
+        this.isEnemyTurn = isEnemyTurn;
     }
 
     public String getEnemyNick() {
@@ -21,4 +23,6 @@ public class StartGameResponse extends Message {
     public Board getEnemyBoard() {
         return enemyBoard;
     }
+
+    public boolean isEnemyTurn() { return isEnemyTurn;}
 }
