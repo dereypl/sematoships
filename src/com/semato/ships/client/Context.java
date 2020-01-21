@@ -11,7 +11,7 @@ public class Context {
     private Board enemyBoard = null;
     private String enemyNick;
     private String playerNick;
-    private boolean isEnemyTurn = false;
+    private volatile boolean isEnemyTurn = false;
 
     public static Context getInstance() {
 

@@ -94,9 +94,9 @@ public class BoardsController implements Initializable {
                             board.add(new ImageView(enemy_water), x, y);
                             int finalX = x;
                             int finalY = y;
-                            if(!Context.getInstance().isEnemyTurn()) {
+//                            if(!Context.getInstance().isEnemyTurn()) {
                                 board.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> doShot(finalX, finalY));
-                            }
+//                            }
                         }
                         break;
 
@@ -131,33 +131,35 @@ public class BoardsController implements Initializable {
         fillBoard(enemyBoard);
     }
 
-    Task<BoardResponse> sendBoardRequest = new Task<BoardResponse>() {
-        @Override
-        protected BoardResponse call() throws Exception {
-            BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
-            return boardResponse;
-        }
-    };
+
 
     private void doShot(int x, int y) {
-        sendBoardRequest.setOnSucceeded(e -> {
-            Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
-            Context.getInstance().setEnemyTurn(false);
-            checkWhoseTurnIs();
-
-        });
 
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
         Context.getInstance().setEnemyTurn(true);
         checkWhoseTurnIs();
         fillBoard(enemyBoard);
-        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
-//        new Thread(sendBoardRequest).start();
-        Context.getInstance().setMyBoard(boardResponse.getMyBoard());
-        Context.getInstance().setEnemyTurn(false);
-        //TODO: remember to fillBoard(enemyBoard) after enemy response (to unlock grid)
-        fillBoard(playerBoard);
+
+        Task<BoardResponse> sendBoardRequest = new Task<BoardResponse>() {
+
+            @Override
+            protected BoardResponse call() throws Exception {
+                BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
+                return boardResponse;
+            }
+        };
+
+        sendBoardRequest.setOnSucceeded(e -> {
+            Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
+            Context.getInstance().setEnemyTurn(false);
+            checkWhoseTurnIs();
+            fillBoard(playerBoard);
+//            fillBoard(enemyBoard); //TODO; fill to unlock gridPane
+        });
+
+        new Thread(sendBoardRequest).start();
+
     }
 
     private void checkWhoseTurnIs(){ //TODO: blokować grida enemy jeżeli nie nasza kolej
