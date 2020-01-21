@@ -44,31 +44,28 @@ public class PlayerInfoController {
             errorLabel.setText("Oczekiwanie na połączenie...");
 
             ClientTcp.getInstance().startConnection("localhost", 5000);
-            Task<StartGameResponse> startConnectionTask = new Task<StartGameResponse>() {
+            Task<StartGameResponse> startGameTask = new Task<StartGameResponse>() {
                 @Override
-                public StartGameResponse call() throws IOException, ClassNotFoundException {
+                public StartGameResponse call() {
                     return ClientTcp.getInstance().sendStartGameRequest(input.getText());
                 }
             };
 
             Task<BoardResponse> sendEmptyRequestTask = new Task<BoardResponse>() {
                 @Override
-                public BoardResponse call() throws IOException, ClassNotFoundException {
+                public BoardResponse call() {
                     return ClientTcp.getInstance().sendEmptyRequest();
                 }
             };
 
 
             sendEmptyRequestTask.setOnSucceeded(e -> {
-                System.out.println(" board success");
                 BoardResponse response = sendEmptyRequestTask.getValue();
                 Context.getInstance().setMyBoard(response.getMyBoard());
-
             });
 
-            startConnectionTask.setOnSucceeded(e -> {
-                System.out.println("success");
-                StartGameResponse response = startConnectionTask.getValue();
+            startGameTask.setOnSucceeded(e -> {
+                StartGameResponse response = startGameTask.getValue();
                 Context.getInstance().setEnemyBoard(response.getEnemyBoard());
                 Context.getInstance().setEnemyTurn(response.isEnemyTurn());
                 Context.getInstance().setEnemyNick(response.getEnemyNick());
@@ -81,7 +78,7 @@ public class PlayerInfoController {
                 WrapperController.getInstance().changeContentToBoards();
             });
 
-            new Thread(startConnectionTask).start();
+            new Thread(startGameTask).start();
         }
     }
 }

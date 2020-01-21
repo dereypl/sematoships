@@ -4,7 +4,9 @@ import com.semato.ships.client.Context;
 import com.semato.ships.client.connector.ClientTcp;
 import com.semato.ships.client.ui.wrapper.WrapperController;
 import com.semato.ships.global.Board;
+import com.semato.ships.global.payload.BoardRequest;
 import com.semato.ships.global.payload.BoardResponse;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -121,6 +123,7 @@ public class BoardsController implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.playerNameLabel.setText(Context.getInstance().getPlayerNick());
@@ -129,12 +132,26 @@ public class BoardsController implements Initializable {
         fillBoard(enemyBoard);
     }
 
+    Task<BoardResponse> sendBoardRequest = new Task<BoardResponse>() {
+        @Override
+        protected BoardResponse call() throws Exception {
+            BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
+            return boardResponse;
+        }
+    };
+
+
     private void doShot(int x, int y) {
+        sendBoardRequest.setOnSucceeded(e -> {
+                    Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
+                    Context.getInstance().setEnemyTurn(true);
+                });
+
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
         WrapperController.getInstance().changeContentToBoards();
-        BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
-        Context.getInstance().setMyBoard(boardResponse.getMyBoard());
+        new Thread(sendBoardRequest).start();
+
     }
 
 }
