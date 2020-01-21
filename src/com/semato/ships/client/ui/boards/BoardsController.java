@@ -78,7 +78,7 @@ public class BoardsController implements Initializable {
 
     private void fillBoard(GridPane board) {
 
-//        board.getChildren().removeAll();
+        board.getChildren().clear();
         int fieldStatus;
         boolean isPlayerBoard = (board == playerBoard);
 
@@ -132,9 +132,10 @@ public class BoardsController implements Initializable {
     private void doShot(int x, int y) {
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
-        WrapperController.getInstance().changeContentToBoards();
+        fillBoard(enemyBoard);
         BoardResponse boardResponse = ClientTcp.getInstance().sendBoard();
         Context.getInstance().setMyBoard(boardResponse.getMyBoard());
+        fillBoard(playerBoard);
     }
 
 }
