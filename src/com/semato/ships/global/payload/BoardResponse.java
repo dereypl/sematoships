@@ -6,9 +6,16 @@ public class BoardResponse extends Message {
 
     private Board myBoard;
 
-    public BoardResponse(Board myBoard) {
+    public boolean isTurn() {
+        return turn;
+    }
+
+    private boolean turn;
+
+    public BoardResponse(Board myBoard, boolean turn) {
         super("Board response");
         this.myBoard = myBoard;
+        this.turn = turn;
     }
 
     public Board getMyBoard() {

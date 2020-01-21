@@ -51,7 +51,7 @@ public class RequestHandler extends Thread {
                     while(!user.isUserTurn()){
                         Thread.sleep(100);
                     }
-                    outObj.writeObject(new BoardResponse(user.getBoard()));
+                    outObj.writeObject(new BoardResponse(user.getBoard(), user.isUserTurn()));
                 }
 
                 if (request instanceof EmptyRequest){
@@ -59,7 +59,7 @@ public class RequestHandler extends Thread {
                     while(!user.isUserTurn()){
                         Thread.sleep(100);
                     }
-                    outObj.writeObject(new BoardResponse(user.getBoard()));
+                    outObj.writeObject(new BoardResponse(user.getBoard(), user.isUserTurn()));
                 }
 
                 if (request instanceof EndConnectionRequest) {
