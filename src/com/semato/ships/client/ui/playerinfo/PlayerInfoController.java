@@ -10,10 +10,12 @@ import com.semato.ships.global.payload.BoardResponse;
 import com.semato.ships.global.payload.StartGameRequest;
 import com.semato.ships.global.payload.StartGameResponse;
 import com.sun.security.ntlm.Client;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PlayerInfoController {
 
@@ -39,17 +41,47 @@ public class PlayerInfoController {
         if (input.getText().trim().isEmpty()) {
             errorLabel.setText("Nie można rozpocząć gry, bez ustalonego pseudonimu!");
         } else {
+            errorLabel.setText("Oczekiwanie na połączenie...");
+
             ClientTcp.getInstance().startConnection("localhost", 5000);
-            StartGameResponse startGameResponse = ClientTcp.getInstance().sendStartGameRequest(input.getText()); //TODO: obsluga bledu na wypadek nulla
-            Context.getInstance().setEnemyBoard(startGameResponse.getEnemyBoard());
-            Context.getInstance().setEnemyTurn(startGameResponse.isEnemyTurn());
-            Context.getInstance().setEnemyNick(startGameResponse.getEnemyNick());
-            Context.getInstance().setPlayerNick(input.getText());
-            WrapperController.getInstance().changeContentToBoards();
-            if(startGameResponse.isEnemyTurn()){
-                BoardResponse boardResponse = ClientTcp.getInstance().sendEmptyRequest();
-                Context.getInstance().setMyBoard(boardResponse.getMyBoard());
-            }
+            Task<StartGameResponse> startConnectionTask = new Task<StartGameResponse>() {
+                @Override
+                public StartGameResponse call() throws IOException, ClassNotFoundException {
+                    return ClientTcp.getInstance().sendStartGameRequest(input.getText());
+                }
+            };
+
+            Task<BoardResponse> sendEmptyRequestTask = new Task<BoardResponse>() {
+                @Override
+                public BoardResponse call() throws IOException, ClassNotFoundException {
+                    return ClientTcp.getInstance().sendEmptyRequest();
+                }
+            };
+
+
+            sendEmptyRequestTask.setOnSucceeded(e -> {
+                System.out.println(" board success");
+                BoardResponse response = sendEmptyRequestTask.getValue();
+                Context.getInstance().setMyBoard(response.getMyBoard());
+
+            });
+
+            startConnectionTask.setOnSucceeded(e -> {
+                System.out.println("success");
+                StartGameResponse response = startConnectionTask.getValue();
+                Context.getInstance().setEnemyBoard(response.getEnemyBoard());
+                Context.getInstance().setEnemyTurn(response.isEnemyTurn());
+                Context.getInstance().setEnemyNick(response.getEnemyNick());
+                Context.getInstance().setPlayerNick(input.getText());
+
+                if(response.isEnemyTurn()){
+                    new Thread(sendEmptyRequestTask).start();
+                }
+
+                WrapperController.getInstance().changeContentToBoards();
+            });
+
+            new Thread(startConnectionTask).start();
         }
     }
 }
