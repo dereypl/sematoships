@@ -122,6 +122,7 @@ public class BoardsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkWhoseTurnIs();
         this.playerNameLabel.setText(Context.getInstance().getPlayerNick());
         this.enemyNameLabel.setText(Context.getInstance().getEnemyNick());
         fillBoard(playerBoard);
@@ -136,17 +137,29 @@ public class BoardsController implements Initializable {
         }
     };
 
-
     private void doShot(int x, int y) {
         sendBoardRequest.setOnSucceeded(e -> {
             Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
-            Context.getInstance().setEnemyTurn(true);
+            Context.getInstance().setEnemyTurn(false);
+            checkWhoseTurnIs();
+
         });
+
 
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
+        Context.getInstance().setEnemyTurn(true);
+        checkWhoseTurnIs();
         fillBoard(enemyBoard);
         new Thread(sendBoardRequest).start();
         fillBoard(playerBoard);
+    }
+
+    private void checkWhoseTurnIs(){ //TODO: blokować grida enemy jeżeli nie nasza kolej
+        if(Context.getInstance().isEnemyTurn()){
+            showEnemyMoveText();
+        } else {
+            showPlayerMoveText();
+        }
     }
 }
