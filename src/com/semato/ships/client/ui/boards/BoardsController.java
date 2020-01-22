@@ -94,9 +94,9 @@ public class BoardsController implements Initializable {
                             board.add(new ImageView(enemy_water), x, y);
                             int finalX = x;
                             int finalY = y;
-//                            if(!Context.getInstance().isEnemyTurn()) {
+                            if(!Context.getInstance().isEnemyTurn()) {
                                 board.getChildren().get(DIMENSION * y + x).setOnMousePressed(e -> doShot(finalX, finalY));
-//                            }
+                            }
                         }
                         break;
 
@@ -155,7 +155,7 @@ public class BoardsController implements Initializable {
             Context.getInstance().setEnemyTurn(false);
             checkWhoseTurnIs();
             fillBoard(playerBoard);
-//            fillBoard(enemyBoard); //TODO; fill to unlock gridPane
+            fillBoard(enemyBoard);
         });
 
         new Thread(sendBoardRequest).start();
