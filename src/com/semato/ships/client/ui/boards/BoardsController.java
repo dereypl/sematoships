@@ -75,6 +75,16 @@ public class BoardsController implements Initializable {
         gameStatusInfo.setFill(Color.rgb(0, 240, 255));
     }
 
+    public void showYouLoseText() {
+        gameStatusInfo.setText("Przegrałeś!");
+        gameStatusInfo.setFill(Color.rgb(236, 28, 45));
+    }
+
+    public void showYouWinText() {
+        gameStatusInfo.setText("Wygrałeś!");
+        gameStatusInfo.setFill(Color.rgb(0, 240, 255));
+    }
+
     private void fillBoard(GridPane board) {
 
         board.getChildren().clear();
@@ -134,7 +144,6 @@ public class BoardsController implements Initializable {
 
 
     private void doShot(int x, int y) {
-
         System.out.println("X: " + x + ", Y:" + y);
         Context.getInstance().getEnemyBoard().shoot(x, y);
         Context.getInstance().setEnemyTurn(true);
@@ -151,13 +160,20 @@ public class BoardsController implements Initializable {
         };
 
         sendBoardRequest.setOnSucceeded(e -> {
-            Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
-            Context.getInstance().setEnemyTurn(false);
-            checkWhoseTurnIs();
-            fillBoard(playerBoard);
-            fillBoard(enemyBoard);
+            if(!checkIfGameEnd()) {
+                Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
+                Context.getInstance().setEnemyTurn(false);
+                checkWhoseTurnIs();
+                fillBoard(playerBoard);
+                fillBoard(enemyBoard);
+            } else {
+                endGame();
+            }
         });
 
+        if(checkIfGameEnd()){
+            endGame();
+        }
         new Thread(sendBoardRequest).start();
 
     }
@@ -167,6 +183,24 @@ public class BoardsController implements Initializable {
             showEnemyMoveText();
         } else {
             showPlayerMoveText();
+        }
+    }
+
+    private boolean checkIfGameEnd(){
+        if(Context.getInstance().getEnemyBoard().isBoardDestroyed() || Context.getInstance().getMyBoard().isBoardDestroyed()){
+            return true;
+        }
+
+        return false;
+    }
+
+    private void endGame(){
+        Context.getInstance().setEnemyTurn(true);
+        fillBoard(enemyBoard);
+        if (Context.getInstance().getMyBoard().isBoardDestroyed()) {
+            showYouLoseText();
+        } else {
+            showYouWinText();
         }
     }
 }
