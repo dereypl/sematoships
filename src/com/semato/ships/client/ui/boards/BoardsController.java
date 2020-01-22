@@ -144,12 +144,15 @@ public class BoardsController implements Initializable {
 
 
     private void doShot(int x, int y) {
-        System.out.println("X: " + x + ", Y:" + y);
-        Context.getInstance().getEnemyBoard().shoot(x, y);
-        Context.getInstance().setEnemyTurn(true);
-        checkWhoseTurnIs();
-        fillBoard(enemyBoard);
-
+        if(checkIfGameEnd()){
+            endGame();
+        } else {
+            System.out.println("X: " + x + ", Y:" + y);
+            Context.getInstance().getEnemyBoard().shoot(x, y);
+            Context.getInstance().setEnemyTurn(true);
+            checkWhoseTurnIs();
+            fillBoard(enemyBoard);
+        }
         Task<BoardResponse> sendBoardRequest = new Task<BoardResponse>() {
 
             @Override
@@ -160,9 +163,10 @@ public class BoardsController implements Initializable {
         };
 
         sendBoardRequest.setOnSucceeded(e -> {
-            if(!checkIfGameEnd()) {
+
                 Context.getInstance().setMyBoard(sendBoardRequest.getValue().getMyBoard());
                 Context.getInstance().setEnemyTurn(false);
+            if(!checkIfGameEnd()) {
                 checkWhoseTurnIs();
                 fillBoard(playerBoard);
                 fillBoard(enemyBoard);
